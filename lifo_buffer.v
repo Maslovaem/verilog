@@ -46,7 +46,7 @@ always @(posedge clock or posedge reset) begin
 
 		else if (write & read) begin
 			dataout_reg <= (empty) ? datain : buffer[top - 1];
-			buffer[top - 1] <= (empty) ? buffer[top - 1]: datain;
+			buffer[top - 1] <= (empty) ? buffer[top - 1] : datain;
 			val <= 'b1;
 		end
 end
