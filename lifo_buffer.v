@@ -32,6 +32,7 @@ always @(posedge clock or posedge reset) begin
 		val <= 'b0;
 		dataout_reg <= 'b0;
 	end
+	else begin
 		if (read & ~write) begin
 			dataout_reg = (empty) ? 'b0 : buffer[top - 1];
 			top <= (empty) ? 'b0 : top - 1;
@@ -49,9 +50,10 @@ always @(posedge clock or posedge reset) begin
 			buffer[top - 1] <= (empty) ? buffer[top - 1] : datain;
 			val <= 'b1;
 		end
+	end
 end
 
-assign full = (top == (LIFO_SIZE - 1));
+assign full = (top == (LIFO_SIZE));
 assign empty = (top == 0);
 assign dataout = dataout_reg;
 
